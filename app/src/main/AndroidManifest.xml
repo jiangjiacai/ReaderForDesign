@@ -22,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".module.login.LoginActivity" />
-        <activity android:name=".module.register.RegisterActivity"/>
+        <activity android:name=".module.register.RegisterActivity" />
+        <activity android:name=".module.bookdetail.BookDetailActivity"></activity>
     </application>
 
 </manifest>
