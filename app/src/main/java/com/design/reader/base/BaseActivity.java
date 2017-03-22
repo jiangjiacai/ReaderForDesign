@@ -25,4 +25,10 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     public abstract int getLayoutId();
 
     protected abstract T createPresenter();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.dettachView();
+    }
 }

@@ -1,17 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.design.reader.main.MainActivity">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/main_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EEEEEF"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <RadioButton
+                android:id="@+id/shelf_pager"
+                style="@style/main_rb_style"
+                android:drawableTop="@drawable/buttom_shelf"
+                android:text="@string/book_shelf" />
+
+            <RadioButton
+                android:id="@+id/store_pager"
+                style="@style/main_rb_style"
+                android:drawableTop="@drawable/buttom_setting"
+                android:text="@string/book_store" />
+
+            <RadioButton
+                android:id="@+id/mine_pager"
+                style="@style/main_rb_style"
+                android:drawableTop="@drawable/buttom_store"
+                android:text="@string/mine" />
+
+            <RadioButton
+                android:id="@+id/setting_pager"
+                style="@style/main_rb_style"
+                android:drawableTop="@drawable/buttom_mine"
+                android:text="@string/setting" />
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
