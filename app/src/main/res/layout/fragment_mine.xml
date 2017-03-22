@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.design.reader.main.fragment.mine.MineFragment">
+    tools:context="com.design.reader.module.main.fragment.mine.MineFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

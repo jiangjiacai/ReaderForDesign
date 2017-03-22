@@ -1,4 +1,4 @@
-package com.design.reader.login;
+package com.design.reader.module.login;
 
 import android.widget.Button;
 import android.widget.CheckBox;

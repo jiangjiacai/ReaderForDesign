@@ -1,4 +1,4 @@
-package com.design.reader.main.fragment.setting;
+package com.design.reader.module.main.fragment.setting;
 
 import com.design.reader.base.BasePresenter;
 

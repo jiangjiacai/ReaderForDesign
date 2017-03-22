@@ -1,4 +1,4 @@
-package com.design.reader.main;
+package com.design.reader.module.main;
 
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
@@ -8,10 +8,10 @@ import android.widget.RadioGroup;
 
 import com.design.reader.R;
 import com.design.reader.base.BaseActivity;
-import com.design.reader.main.fragment.mine.MineFragment;
-import com.design.reader.main.fragment.setting.SettingFragment;
-import com.design.reader.main.fragment.shelf.ShelfFragment;
-import com.design.reader.main.fragment.store.StoreFragment;
+import com.design.reader.module.main.fragment.mine.MineFragment;
+import com.design.reader.module.main.fragment.setting.SettingFragment;
+import com.design.reader.module.main.fragment.shelf.ShelfFragment;
+import com.design.reader.module.main.fragment.store.StoreFragment;
 
 import butterknife.BindView;
 

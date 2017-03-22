@@ -1,4 +1,4 @@
-package com.design.reader.register;
+package com.design.reader.module.register;
 
 import android.widget.Button;
 import android.widget.EditText;

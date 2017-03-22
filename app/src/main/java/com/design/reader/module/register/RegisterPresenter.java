@@ -1,4 +1,4 @@
-package com.design.reader.register;
+package com.design.reader.module.register;
 
 
 import com.design.reader.base.BasePresenter;

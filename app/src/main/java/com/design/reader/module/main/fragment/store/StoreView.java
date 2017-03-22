@@ -1,4 +1,4 @@
-package com.design.reader.main.fragment.store;
+package com.design.reader.module.main.fragment.store;
 
 import com.design.reader.base.BaseView;
 
