@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".module.login.LoginActivity" />
         <activity android:name=".module.register.RegisterActivity" />
-        <activity android:name=".module.bookdetail.BookDetailActivity"></activity>
+        <activity android:name=".module.bookdetail.BookDetailActivity" />
+        <activity android:name=".module.search.SearchActivity"></activity>
     </application>
 
 </manifest>
