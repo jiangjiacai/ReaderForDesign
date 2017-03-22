@@ -11,5 +11,7 @@
     <string name="save_password">记住密码</string>
     <string name="forget_password">忘记密码?</string>
     <string name="have_no_account">还没有账号?</string>
+    <string name="have_account">已有账号?</string>
     <string name="register_now">现在注册</string>
+    <string name="sure_password">请确认密码</string>
 </resources>
