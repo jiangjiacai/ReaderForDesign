@@ -28,7 +28,16 @@
     <string name="leased">已租赁</string>
     <string name="purchased">已购买</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">用户名:</string>
+    <string name="phone_number">手机号码:</string>
+    <string name="state">状态:</string>
+    <string name="wallet">钱包:</string>
+
+    <string name="purchased_book">已购买图书:</string>
+    <string name="leased_book">已租赁图书:</string>
+    <string name="font">字体号:</string>
+    <string name="module">模式:</string>
+    <string name="about">关于我们</string>
+    <string name="version">版本号</string>
 
 </resources>

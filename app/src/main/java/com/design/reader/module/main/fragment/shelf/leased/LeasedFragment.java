@@ -57,7 +57,7 @@ public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> im
                     bookInfo.setPrice(120 + i);
                     infos.add(bookInfo);
                 }
-                Observable.timer(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
+                Observable.timer(3, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
                         bookListAdapter.setInfos(infos);
@@ -78,7 +78,7 @@ public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> im
                     bookInfo.setPrice(80 + i);
                     infos.add(bookInfo);
                 }
-                Observable.timer(3, TimeUnit.SECONDS).subscribe(new Action1<Long>() {
+                Observable.timer(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
                         bookListAdapter.setInfos(infos);
