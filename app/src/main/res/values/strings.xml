@@ -25,5 +25,10 @@
     <string name="piece">本</string>
     <string name="buy_book">立即购买</string>
     <string name="rent_book">立即租赁</string>
+    <string name="leased">已租赁</string>
+    <string name="purchased">已购买</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
