@@ -1,5 +1,6 @@
 package com.design.reader.module.main.fragment.store;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -7,6 +8,7 @@ import com.design.reader.R;
 import com.design.reader.adapter.BookListAdapter;
 import com.design.reader.base.BaseFragment;
 import com.design.reader.entity.BookInfo;
+import com.design.reader.module.read.ReadActivity;
 import com.design.reader.tools.BookDividerDecoration;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
@@ -32,6 +34,13 @@ public class StoreFragment extends BaseFragment<StoreView, StorePresenter> imple
             infos.add(bookInfo);
         }
         bookListAdapter.setInfos(infos);
+        bookListAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(getActivity(), ReadActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         pullToRefreshRecyclerView.getRecyclerView().addItemDecoration(new BookDividerDecoration(getActivity()));
         pullToRefreshRecyclerView.removeHeader();
