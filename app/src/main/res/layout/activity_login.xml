@@ -114,8 +114,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:checked="true"
-            android:text="@string/save_password"
-            android:textColor="#fff" />
+            android:text="@string/save_password" />
 
         <TextView
             android:id="@+id/forgot_password"

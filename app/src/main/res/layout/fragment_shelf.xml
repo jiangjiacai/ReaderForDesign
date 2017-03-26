@@ -28,24 +28,77 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/book_recycler"
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<Button-->
+    <!--android:id="@+id/purchased_button"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/btn_login_selector"-->
+    <!--android:text="@string/purchased" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/leased_button"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_margin="10dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/btn_login_selector"-->
+    <!--android:text="@string/leased" />-->
+    <!--</LinearLayout>-->
+
+    <RadioGroup
+        android:id="@+id/shelf_radio_group"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="60dp"
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/purchased_radio_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/purchased_radio"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/purchased" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/shelf_viewpager"
+        <RadioButton
+            android:id="@+id/leased_radio_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/purchased_radio"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/leased" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/shelf_frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <android.support.v4.view.PagerTabStrip
-            android:layout_gravity="top"
-            android:id="@+id/shelf_pager_strip"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/toolbar_height" />
-    </android.support.v4.view.ViewPager>
+
+    <!--<android.support.v4.view.ViewPager-->
+    <!--android:id="@+id/shelf_viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--<android.support.v4.view.PagerTabStrip-->
+    <!--android:id="@+id/shelf_pager_strip"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="@dimen/toolbar_height"-->
+    <!--android:layout_gravity="top" />-->
+    <!--</android.support.v4.view.ViewPager>-->
 
 
 </LinearLayout>

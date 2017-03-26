@@ -1,61 +1,47 @@
 package com.design.reader.module.main.fragment.shelf;
 
-import android.os.Bundle;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.design.reader.R;
-import com.design.reader.adapter.BookListAdapter;
-import com.design.reader.adapter.ShelfFragmentPagerAdapter;
 import com.design.reader.base.BaseFragment;
-import com.design.reader.entity.BookInfo;
-import com.design.reader.tools.BookDividerDecoration;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.design.reader.module.main.fragment.shelf.leased.LeasedFragment;
+import com.design.reader.module.main.fragment.shelf.purchased.PurchasedFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> implements ShelfView {
+public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> implements ShelfView, RadioGroup.OnCheckedChangeListener {
 
     public static final int LEASED = 1;
     public static final int PURCHASED = 0;
 
     @BindView(R.id.search_imageView)
     ImageView searchImageView;
-    @BindView(R.id.book_recycler)
-    RecyclerView bookRecycler;
-    @BindView(R.id.shelf_pager_strip)
-    PagerTabStrip shelfPagerStrip;
-    @BindView(R.id.shelf_viewpager)
-    ViewPager shelfViewpager;
+//    @BindView(R.id.shelf_pager_strip)
+//    PagerTabStrip shelfPagerStrip;
+//    @BindView(R.id.shelf_viewpager)
+//    ViewPager shelfViewpager;
+
+    @BindView(R.id.shelf_radio_group)
+    RadioGroup radioGroup;
+
+    private PurchasedFragment purchasedFragment;
+    private LeasedFragment leasedFragment;
 
     @Override
     public void initViews(View view) {
+        radioGroup.setOnCheckedChangeListener(this);
+        purchasedFragment = new PurchasedFragment();
+        leasedFragment = new LeasedFragment();
 
-        ShelfFragmentPagerAdapter adapter = new ShelfFragmentPagerAdapter(getChildFragmentManager());
-        shelfViewpager.setAdapter(adapter);
-
-        BookListAdapter bookListAdapter = new BookListAdapter();
-        List<BookInfo> infos = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
-            BookInfo bookInfo = new BookInfo();
-            bookInfo.setRes(R.mipmap.setting2);
-            bookInfo.setName("小说" + i);
-            bookInfo.setPrice(40 + i);
-            infos.add(bookInfo);
-        }
-        bookListAdapter.setInfos(infos);
-        bookRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        bookRecycler.addItemDecoration(new BookDividerDecoration(getActivity()));
-        bookRecycler.setAdapter(bookListAdapter);
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        showPurchasedFragment(fragmentTransaction);
+        fragmentTransaction.commit();
+//        ShelfFragmentPagerAdapter adapter = new ShelfFragmentPagerAdapter(getChildFragmentManager());
+//        shelfViewpager.setAdapter(adapter);
     }
 
     @Override
@@ -66,5 +52,49 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
     @Override
     public ShelfPresenter createPresenter() {
         return new ShelfPresenter();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        hideAllFragment(ft);
+        switch (i) {
+            case R.id.purchased_radio_button:
+                Toast.makeText(getActivity(), "1", Toast.LENGTH_SHORT).show();
+                showPurchasedFragment(ft);
+                break;
+            case R.id.leased_radio_button:
+                Toast.makeText(getActivity(), "2", Toast.LENGTH_SHORT).show();
+                showLeasedFragment(ft);
+                break;
+        }
+        ft.commit();
+    }
+
+    private void showPurchasedFragment(FragmentTransaction transaction) {
+        if (purchasedFragment == null) {
+            purchasedFragment = new PurchasedFragment();
+            transaction.add(R.id.shelf_frame_layout, purchasedFragment,"purchasedFragment");
+        } else {
+            transaction.show(purchasedFragment);
+        }
+    }
+
+    private void showLeasedFragment(FragmentTransaction transaction) {
+        if (leasedFragment == null) {
+            leasedFragment = new LeasedFragment();
+            transaction.add(R.id.shelf_frame_layout, leasedFragment,"leasedFragment");
+        } else {
+            transaction.show(leasedFragment);
+        }
+    }
+
+    private void hideAllFragment(FragmentTransaction fragmentTransaction) {
+        if (purchasedFragment != null) {
+            fragmentTransaction.hide(purchasedFragment);
+        }
+        if (leasedFragment != null) {
+            fragmentTransaction.hide(leasedFragment);
+        }
     }
 }
