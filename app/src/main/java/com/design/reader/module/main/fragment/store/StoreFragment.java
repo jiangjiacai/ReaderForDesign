@@ -1,8 +1,11 @@
 package com.design.reader.module.main.fragment.store;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.design.reader.R;
 import com.design.reader.adapter.BookListAdapter;
@@ -12,6 +15,7 @@ import com.design.reader.module.read.ReadActivity;
 import com.design.reader.tools.BookDividerDecoration;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +41,25 @@ public class StoreFragment extends BaseFragment<StoreView, StorePresenter> imple
         bookListAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent intent = new Intent(getActivity(), ReadActivity.class);
-                getActivity().startActivity(intent);
+//                Intent intent = new Intent(getActivity(), ReadActivity.class);
+//                getActivity().startActivity(intent);
+                String str = Environment.getExternalStorageDirectory().getPath() + "/test.txt";
+                File file = new File(str);
+                if(file.exists()){
+                    Toast.makeText(getActivity(),"书籍存在",Toast.LENGTH_SHORT).show();
+                    Uri path = Uri.fromFile(file);
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(path, "text/plain");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    try {
+                        getActivity().startActivity(intent);
+//                    }
+//                    catch (Exception e) {
+//                        Toast.makeText(getContext(), "打开失败", Toast.LENGTH_SHORT).show();
+//                    }
+                }else {
+                    Toast.makeText(getActivity(),"书籍不存在",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));

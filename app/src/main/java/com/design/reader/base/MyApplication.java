@@ -2,6 +2,7 @@ package com.design.reader.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 
 public class MyApplication extends Application {
@@ -18,6 +19,9 @@ public class MyApplication extends Application {
         super.onCreate();
         context = getApplicationContext();
         instance = this;
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
     }
 
     public static Context getContext() {

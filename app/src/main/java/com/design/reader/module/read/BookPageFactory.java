@@ -34,7 +34,7 @@ public class BookPageFactory {
 
     private Vector<String> m_lines = new Vector<String>();
 
-    private int m_fontSize = 24;
+    private int m_fontSize = 50;
     private int m_textColor = Color.BLACK;
     private int m_backColor = 0xffff9e85; // ������ɫ
     private int marginWidth = 15; // �������Ե�ľ���
