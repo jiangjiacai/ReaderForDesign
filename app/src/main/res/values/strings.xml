@@ -33,6 +33,7 @@
     <string name="state">状态:</string>
     <string name="wallet">钱包:</string>
 
+    <string name="search">搜索</string>
     <string name="purchased_book">已购买图书:</string>
     <string name="leased_book">已租赁图书:</string>
     <string name="font">字体号:</string>

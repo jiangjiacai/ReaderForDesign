@@ -47,6 +47,7 @@
                 android:text="@string/mine" />
 
             <RadioButton
+                android:visibility="gone"
                 android:id="@+id/setting_pager"
                 style="@style/main_rb_style"
                 android:drawableTop="@drawable/buttom_mine"

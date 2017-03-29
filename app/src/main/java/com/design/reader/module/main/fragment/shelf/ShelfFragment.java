@@ -1,5 +1,6 @@
 package com.design.reader.module.main.fragment.shelf;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,8 +11,10 @@ import com.design.reader.R;
 import com.design.reader.base.BaseFragment;
 import com.design.reader.module.main.fragment.shelf.leased.LeasedFragment;
 import com.design.reader.module.main.fragment.shelf.purchased.PurchasedFragment;
+import com.design.reader.module.search.SearchActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> implements ShelfView, RadioGroup.OnCheckedChangeListener {
 
@@ -34,8 +37,6 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
     @Override
     public void initViews(View view) {
         radioGroup.setOnCheckedChangeListener(this);
-        purchasedFragment = new PurchasedFragment();
-        leasedFragment = new LeasedFragment();
 
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         showPurchasedFragment(fragmentTransaction);
@@ -71,10 +72,16 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
         ft.commit();
     }
 
+    @OnClick(R.id.search_imageView)
+    void search(View v) {
+        Intent intent = new Intent(getActivity(), SearchActivity.class);
+        startActivity(intent);
+    }
+
     private void showPurchasedFragment(FragmentTransaction transaction) {
         if (purchasedFragment == null) {
             purchasedFragment = new PurchasedFragment();
-            transaction.add(R.id.shelf_frame_layout, purchasedFragment,"purchasedFragment");
+            transaction.add(R.id.shelf_frame_layout, purchasedFragment, "purchasedFragment");
         } else {
             transaction.show(purchasedFragment);
         }
@@ -83,7 +90,7 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
     private void showLeasedFragment(FragmentTransaction transaction) {
         if (leasedFragment == null) {
             leasedFragment = new LeasedFragment();
-            transaction.add(R.id.shelf_frame_layout, leasedFragment,"leasedFragment");
+            transaction.add(R.id.shelf_frame_layout, leasedFragment, "leasedFragment");
         } else {
             transaction.show(leasedFragment);
         }

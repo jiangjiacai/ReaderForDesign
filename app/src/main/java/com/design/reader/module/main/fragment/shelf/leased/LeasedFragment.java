@@ -10,6 +10,7 @@ import com.design.reader.base.BaseFragment;
 import com.design.reader.entity.BookInfo;
 import com.design.reader.tools.BookDividerDecoration;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
+import com.lhh.ptrrv.library.footer.loadmore.BaseLoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +45,12 @@ public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> im
         pullToRefreshRecyclerView.getRecyclerView().addItemDecoration(new BookDividerDecoration(getActivity()));
         pullToRefreshRecyclerView.removeHeader();
         pullToRefreshRecyclerView.setSwipeEnable(true);
+        pullToRefreshRecyclerView.setLoadMoreCount(120);
 //        pullToRefreshRecyclerView.addHeaderView(View.inflate(getActivity(), R.layout.book_list_item, null));
-        pullToRefreshRecyclerView.setLoadmoreString("加载中...");
+        BaseLoadMoreView baseLoadMoreView = new BaseLoadMoreView(getActivity(), pullToRefreshRecyclerView.getRecyclerView());
+        baseLoadMoreView.setLoadmoreString("加载中...");
+        baseLoadMoreView.setLoadMorePadding(100);
+        pullToRefreshRecyclerView.setLoadMoreFooter(baseLoadMoreView);
         pullToRefreshRecyclerView.setPagingableListener(new PullToRefreshRecyclerView.PagingableListener() {
             @Override
             public void onLoadMoreItems() {

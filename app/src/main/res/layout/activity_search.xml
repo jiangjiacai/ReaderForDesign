@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.design.reader.module.search.SearchActivity">
 
     <com.mancj.materialsearchbar.MaterialSearchBar
-        app:speechMode="true"
-        app:hint="Custom hint"
-        app:maxSuggestionsCount="10"
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar" />
+        app:hint="请输入书籍名称"
+        app:maxSuggestionsCount="10"
+        app:speechMode="true" />
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="10dp"
+        android:id="@+id/search_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" />
 
 </LinearLayout>
