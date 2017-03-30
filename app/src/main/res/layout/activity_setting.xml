@@ -5,14 +5,28 @@
     android:orientation="vertical"
     tools:context="com.design.reader.module.main.fragment.setting.SettingFragment">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="@string/setting"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/set_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:src="@mipmap/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/toolbar_height"
+            android:layout_centerInParent="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/setting"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/font_layout"
@@ -170,14 +184,15 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_margin="20dp"
-        android:text="@string/logout"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:background="@drawable/btn_login_selector"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/toolbar_height" />
+        android:layout_height="@dimen/toolbar_height"
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_login_selector"
+        android:gravity="center"
+        android:text="@string/logout"
+        android:layout_gravity="bottom"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 
 </LinearLayout>

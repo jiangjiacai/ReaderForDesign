@@ -1,17 +1,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.design.reader.module.main.fragment.store.StoreFragment">
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/toolbar_height"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="@string/book_store"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/book_store"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="10dp">
+
+            <ImageView
+                android:id="@+id/search_store"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/search" />
+        </RelativeLayout>
+    </RelativeLayout>
+
     <com.lhh.ptrrv.library.PullToRefreshRecyclerView
         android:id="@+id/recycler_store"
         android:layout_width="match_parent"

@@ -50,7 +50,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 BookInfo bookInfo = infos.get(position);
                 ((BookViewHolder) holder).imageView.setImageResource(bookInfo.getRes());
                 ((BookViewHolder) holder).bookName.setText(bookInfo.getName());
-                ((BookViewHolder) holder).bookPrice.setText("￥ " + bookInfo.getPrice());
+                ((BookViewHolder) holder).bookPrice.setText(bookInfo.getDescription());
                 if (onItemClickListener != null) {
                     ((BookViewHolder) holder).bookItem.setOnClickListener(new View.OnClickListener() {
                         @Override

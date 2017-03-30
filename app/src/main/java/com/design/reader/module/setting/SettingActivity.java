@@ -2,7 +2,6 @@ package com.design.reader.module.setting;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import com.design.reader.base.BaseActivity;
 import com.design.reader.module.AboutActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class SettingActivity extends BaseActivity<SettingView, SettingPresenter> implements SettingView {
@@ -42,7 +40,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     }
 
-    @OnClick({R.id.logout, R.id.about_layout})
+    @OnClick({R.id.logout, R.id.about_layout, R.id.set_back})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.logout:
@@ -61,6 +59,9 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
             case R.id.about_layout:
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.set_back:
+                finish();
                 break;
         }
     }
