@@ -11,7 +11,7 @@ import com.design.reader.entity.BookInfo;
 import com.design.reader.module.bookdetail.BookDetailActivity;
 import com.design.reader.module.search.SearchActivity;
 import com.design.reader.tools.BookDividerDecoration;
-import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ import butterknife.OnClick;
 public class StoreFragment extends BaseFragment<StoreView, StorePresenter> implements StoreView {
 
     @BindView(R.id.recycler_store)
-    PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    XRecyclerView mRecyclerView;
 
     @Override
     public void initViews(View view) {
@@ -57,11 +57,11 @@ public class StoreFragment extends BaseFragment<StoreView, StorePresenter> imple
                 getActivity().startActivity(intent);
             }
         });
-        pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        pullToRefreshRecyclerView.getRecyclerView().addItemDecoration(new BookDividerDecoration(getActivity()));
-        pullToRefreshRecyclerView.removeHeader();
-        pullToRefreshRecyclerView.setSwipeEnable(true);
-        pullToRefreshRecyclerView.setAdapter(bookListAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new BookDividerDecoration(getActivity()));
+        mRecyclerView.setAdapter(bookListAdapter);
     }
 
     @OnClick({R.id.search_store})

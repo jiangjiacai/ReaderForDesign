@@ -3,7 +3,6 @@ package com.design.reader.module.main.fragment.shelf.leased;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
@@ -13,8 +12,7 @@ import com.design.reader.adapter.BookListAdapter;
 import com.design.reader.base.BaseFragment;
 import com.design.reader.entity.BookInfo;
 import com.design.reader.tools.BookDividerDecoration;
-import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
-import com.lhh.ptrrv.library.footer.loadmore.BaseLoadMoreView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,14 +23,16 @@ import butterknife.BindView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> implements LeasedView {
 
+
     @BindView(R.id.recycler_leased)
-    PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    XRecyclerView mRecyclerView;
+
 
     private int COUNT = 40;
+
 
     @Override
     public void initViews(View view) {
@@ -64,62 +64,53 @@ public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> im
                 }
             }
         });
-        pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        pullToRefreshRecyclerView.getRecyclerView().addItemDecoration(new BookDividerDecoration(getActivity()));
-        pullToRefreshRecyclerView.removeHeader();
-        pullToRefreshRecyclerView.setSwipeEnable(true);
-        pullToRefreshRecyclerView.setLoadMoreCount(120);
-//        pullToRefreshRecyclerView.addHeaderView(View.inflate(getActivity(), R.layout.book_list_item, null));
-        BaseLoadMoreView baseLoadMoreView = new BaseLoadMoreView(getActivity(), pullToRefreshRecyclerView.getRecyclerView());
-        baseLoadMoreView.setLoadmoreString("加载中...");
-        baseLoadMoreView.setLoadMorePadding(100);
-        pullToRefreshRecyclerView.setLoadMoreFooter(baseLoadMoreView);
-        pullToRefreshRecyclerView.setPagingableListener(new PullToRefreshRecyclerView.PagingableListener() {
-            @Override
-            public void onLoadMoreItems() {
-                final List<BookInfo> infos = new ArrayList<>();
-                for (int i = 0; i < 120; i++) {
-                    BookInfo bookInfo = new BookInfo();
-                    bookInfo.setRes(R.mipmap.test);
-                    bookInfo.setName("租赁小说" + i);
-                    bookInfo.setPrice(120 + i);
-                    bookInfo.setDescription(getResources().getString(R.string.test_string));
-                    infos.add(bookInfo);
-                }
-                Observable.timer(3, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
-                    @Override
-                    public void call(Long aLong) {
-                        bookListAdapter.setInfos(infos);
-                        bookListAdapter.notifyDataSetChanged();
-                        pullToRefreshRecyclerView.setOnLoadMoreComplete();
-                    }
-                });
-            }
-        });
-        pullToRefreshRecyclerView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRecyclerView.addItemDecoration(new BookDividerDecoration(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(bookListAdapter);
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                final List<BookInfo> infos = new ArrayList<>();
-                for (int i = 0; i < 80; i++) {
-                    BookInfo bookInfo = new BookInfo();
-                    bookInfo.setRes(R.mipmap.test);
-                    bookInfo.setName("租赁小说" + i);
-                    bookInfo.setPrice(80 + i);
-                    bookInfo.setDescription(getResources().getString(R.string.test_string));
-                    infos.add(bookInfo);
-                }
                 Observable.timer(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
+                        infos.clear();
+                        for (int i = 0; i < COUNT + 20; i++) {
+                            BookInfo bookInfo = new BookInfo();
+                            bookInfo.setRes(R.mipmap.test);
+                            bookInfo.setName("租赁小说" + i);
+                            bookInfo.setPrice(COUNT + i);
+                            bookInfo.setDescription(getResources().getString(R.string.test_string));
+                            infos.add(bookInfo);
+                        }
+                        COUNT += 20;
                         bookListAdapter.setInfos(infos);
-                        bookListAdapter.notifyDataSetChanged();
-                        pullToRefreshRecyclerView.setOnRefreshComplete();
+                        mRecyclerView.refreshComplete();
+                    }
+                });
+            }
+
+            @Override
+            public void onLoadMore() {
+                Observable.timer(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        for (int i = COUNT; i < COUNT + 20; i++) {
+                            BookInfo bookInfo = new BookInfo();
+                            bookInfo.setRes(R.mipmap.test);
+                            bookInfo.setName("租赁小说" + i);
+                            bookInfo.setPrice(COUNT + i);
+                            bookInfo.setDescription(getResources().getString(R.string.test_string));
+                            infos.add(bookInfo);
+                        }
+                        COUNT += 20;
+                        bookListAdapter.setInfos(infos);
+                        mRecyclerView.loadMoreComplete();
                     }
                 });
             }
         });
-        pullToRefreshRecyclerView.onFinishLoading(true, false);
-        pullToRefreshRecyclerView.setAdapter(bookListAdapter);
     }
 
     @Override

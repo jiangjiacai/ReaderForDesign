@@ -12,7 +12,7 @@ import com.design.reader.adapter.BookListAdapter;
 import com.design.reader.base.BaseFragment;
 import com.design.reader.entity.BookInfo;
 import com.design.reader.tools.BookDividerDecoration;
-import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import butterknife.BindView;
 public class PurchasedFragment extends BaseFragment<PurchasedView, PurchasedPresenter> implements PurchasedView {
 
     @BindView(R.id.recycler_purchased)
-    PullToRefreshRecyclerView pullToRefreshRecyclerView;
+    XRecyclerView mRecyclerView;
 
     @Override
     public void initViews(View view) {
@@ -56,9 +56,11 @@ public class PurchasedFragment extends BaseFragment<PurchasedView, PurchasedPres
                 }
             }
         });
-        pullToRefreshRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        pullToRefreshRecyclerView.getRecyclerView().addItemDecoration(new BookDividerDecoration(getActivity()));
-        pullToRefreshRecyclerView.setAdapter(bookListAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new BookDividerDecoration(getActivity()));
+        mRecyclerView.setAdapter(bookListAdapter);
     }
 
     @Override

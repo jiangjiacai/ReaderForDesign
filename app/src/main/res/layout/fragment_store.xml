@@ -34,7 +34,7 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.lhh.ptrrv.library.PullToRefreshRecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_store"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="com.design.reader.module.main.fragment.shelf.leased.LeasedFragment">
 
-    <com.lhh.ptrrv.library.PullToRefreshRecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recycler_leased"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
