@@ -39,7 +39,7 @@ public class StoreFragment extends BaseFragment<StoreView, StorePresenter> imple
         bookListAdapter.setInfos(infos);
         bookListAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
+            public void onItemClick(View v, int position, BookInfo bookInfo) {
 //                String str = Environment.getExternalStorageDirectory().getPath() + "/test.txt";
 //                File file = new File(str);
 //                if (file.exists()) {

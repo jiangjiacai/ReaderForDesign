@@ -3,6 +3,7 @@ package com.design.reader.api;
 
 import com.design.reader.base.Constant;
 
+import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -40,5 +41,9 @@ public class ReaderApi {
 
     public Observable<String> register(String userName, String password) {
         return service.login(userName, password);
+    }
+
+    public Observable<ResponseBody> downloadBook(String url) {
+        return service.downloadBook(url);
     }
 }

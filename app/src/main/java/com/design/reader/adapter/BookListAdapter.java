@@ -47,7 +47,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof BookViewHolder) {
             if (infos != null && !infos.isEmpty()) {
-                BookInfo bookInfo = infos.get(position);
+                final BookInfo bookInfo = infos.get(position);
                 ((BookViewHolder) holder).imageView.setImageResource(bookInfo.getRes());
                 ((BookViewHolder) holder).bookName.setText(bookInfo.getName());
                 ((BookViewHolder) holder).bookPrice.setText(bookInfo.getDescription());
@@ -55,7 +55,7 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     ((BookViewHolder) holder).bookItem.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            onItemClickListener.onItemClick(view, position);
+                            onItemClickListener.onItemClick(view, position, bookInfo);
                         }
                     });
                 }
@@ -88,6 +88,6 @@ public class BookListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View v, int position);
+        void onItemClick(View v, int position, BookInfo bookInfo);
     }
 }

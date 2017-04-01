@@ -49,8 +49,8 @@ public class LeasedFragment extends BaseFragment<LeasedView, LeasedPresenter> im
         bookListAdapter.setInfos(infos);
         bookListAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
-                String str = Environment.getExternalStorageDirectory().getPath() + "/test.txt";
+            public void onItemClick(View v, int position, BookInfo bookInfo) {
+                String str = Environment.getExternalStorageDirectory().getPath() + "/" + bookInfo.getName();
                 File file = new File(str);
                 if (file.exists()) {
                     Toast.makeText(getActivity(), "书籍存在", Toast.LENGTH_SHORT).show();

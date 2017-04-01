@@ -26,23 +26,25 @@ public class PurchasedFragment extends BaseFragment<PurchasedView, PurchasedPres
     @BindView(R.id.recycler_purchased)
     XRecyclerView mRecyclerView;
 
+    BookListAdapter bookListAdapter;
+
     @Override
     public void initViews(View view) {
-        BookListAdapter bookListAdapter = new BookListAdapter();
-        List<BookInfo> infos = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
-            BookInfo bookInfo = new BookInfo();
-            bookInfo.setRes(R.mipmap.test);
-            bookInfo.setName("购买小说" + i);
-            bookInfo.setPrice(40 + i);
-            bookInfo.setDescription(getResources().getString(R.string.test_string));
-            infos.add(bookInfo);
-        }
-        bookListAdapter.setInfos(infos);
+        bookListAdapter = new BookListAdapter();
+//        List<BookInfo> infos = new ArrayList<>();
+//        for (int i = 0; i < 40; i++) {
+//            BookInfo bookInfo = new BookInfo();
+//            bookInfo.setRes(R.mipmap.test);
+//            bookInfo.setName("购买小说" + i);
+//            bookInfo.setPrice(40 + i);
+//            bookInfo.setDescription(getResources().getString(R.string.test_string));
+//            infos.add(bookInfo);
+//        }
+//        bookListAdapter.setInfos(infos);
         bookListAdapter.setOnItemClickListener(new BookListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View v, int position) {
-                String str = Environment.getExternalStorageDirectory().getPath() + "/test.txt";
+            public void onItemClick(View v, int position, BookInfo bookInfo) {
+                String str = Environment.getExternalStorageDirectory().getPath() + "/" + bookInfo.getName();
                 File file = new File(str);
                 if (file.exists()) {
                     Toast.makeText(getActivity(), "书籍存在", Toast.LENGTH_SHORT).show();
@@ -61,6 +63,8 @@ public class PurchasedFragment extends BaseFragment<PurchasedView, PurchasedPres
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new BookDividerDecoration(getActivity()));
         mRecyclerView.setAdapter(bookListAdapter);
+
+        mPresenter.getFileInfo(getActivity());
     }
 
     @Override
@@ -71,5 +75,20 @@ public class PurchasedFragment extends BaseFragment<PurchasedView, PurchasedPres
     @Override
     public PurchasedPresenter createPresenter() {
         return new PurchasedPresenter();
+    }
+
+    @Override
+    public void showBookInfo(List<BookInfo> bookInfos) {
+        if (bookInfos == null) {
+            Toast.makeText(getActivity(), "空的", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        bookListAdapter.setInfos(bookInfos);
+        bookListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }
