@@ -1,7 +1,9 @@
 package com.design.reader.module.main.fragment.shelf;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -43,6 +45,7 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
         fragmentTransaction.commit();
 //        ShelfFragmentPagerAdapter adapter = new ShelfFragmentPagerAdapter(getChildFragmentManager());
 //        shelfViewpager.setAdapter(adapter);
+        mPresenter.initPermission(getActivity());
     }
 
     @Override
@@ -103,5 +106,26 @@ public class ShelfFragment extends BaseFragment<ShelfView, ShelfPresenter> imple
         if (leasedFragment != null) {
             fragmentTransaction.hide(leasedFragment);
         }
+    }
+
+    @Override
+    public void grantedPermission() {
+
+    }
+
+    @Override
+    public void permissionFailed() {
+        AlertDialog dialog = new AlertDialog.Builder(getActivity()).setTitle("通知").setMessage("该权限必须获取！请点击确认重新获取").setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mPresenter.initPermission(getActivity());
+            }
+        }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+            }
+        }).create();
+        dialog.show();
     }
 }

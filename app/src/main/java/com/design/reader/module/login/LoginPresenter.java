@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.design.reader.base.BasePresenter;
+import com.design.reader.entity.db.User;
 import com.design.reader.module.register.RegisterActivity;
 import com.design.reader.tools.SharedPreferenceUtils;
 
@@ -44,6 +45,12 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             SharedPreferenceUtils.getInstance().putString(SharedPreferenceUtils.SHARED_PHONE, userName).putString(SharedPreferenceUtils.SHARED_PASSWORD, passWord);
         } else {
             SharedPreferenceUtils.getInstance().putString(SharedPreferenceUtils.SHARED_PHONE, "").putString(SharedPreferenceUtils.SHARED_PASSWORD, "");
+        }
+        User user = new User();
+        user.setNumber(userName);
+        user.saveOrUpdate();
+        if (isViewAttached()) {
+            getView().loginSuccess();
         }
     }
 

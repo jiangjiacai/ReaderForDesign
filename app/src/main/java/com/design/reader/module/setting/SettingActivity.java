@@ -9,8 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.design.reader.R;
+import com.design.reader.base.AppManager;
 import com.design.reader.base.BaseActivity;
 import com.design.reader.module.AboutActivity;
+import com.design.reader.module.login.LoginActivity;
+import com.design.reader.tools.SharedPreferenceUtils;
+import com.design.reader.tools.ToolUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,7 +41,7 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
 
     @Override
     public void initViews() {
-
+        versionNumber.setText(ToolUtils.getVersionName());
     }
 
     @OnClick({R.id.logout, R.id.about_layout, R.id.set_back})
@@ -48,6 +52,10 @@ public class SettingActivity extends BaseActivity<SettingView, SettingPresenter>
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        SharedPreferenceUtils.getInstance().putBoolean(SharedPreferenceUtils.AUTO_LOGIN, false);
+                        AppManager.getAppManager().finishAllActivity();
+                        Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
                 }).setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
                     @Override

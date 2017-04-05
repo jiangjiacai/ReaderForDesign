@@ -1,11 +1,13 @@
 package com.design.reader.base;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
 
+import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
 
-public class MyApplication extends Application {
+
+public class MyApplication extends LitePalApplication {
 
     private static Context context;
     private static MyApplication instance;
@@ -17,6 +19,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        LitePal.initialize(this);
+        LitePal.getDatabase();
         context = getApplicationContext();
         instance = this;
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();

@@ -2,6 +2,7 @@ package com.design.reader.module.main.fragment.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.design.reader.R;
 import com.design.reader.base.BaseFragment;
 import com.design.reader.module.setting.SettingActivity;
+import com.design.reader.tools.SharedPreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,6 +59,17 @@ public class MineFragment extends BaseFragment<MineView, MinePresenter> implemen
         }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String number = SharedPreferenceUtils.getInstance().getString(SharedPreferenceUtils.SHARED_PHONE);
+        if (number != null && number.length() != 0) {
+            userPhone.setText(number.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2"));
+        } else {
+            userPhone.setText("未设置");
+        }
+    }
 
     @Override
     public MinePresenter createPresenter() {

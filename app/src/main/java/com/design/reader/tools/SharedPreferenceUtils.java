@@ -14,6 +14,8 @@ public class SharedPreferenceUtils {
     public static final String SHARED_PHONE = "shared_phone";
     public static final String SHARED_PASSWORD = "shared_password";
 
+    public static final String AUTO_LOGIN = "auto_login";
+
     private SharedPreferenceUtils() {
         sharedPreferences = MyApplication.getContext().getSharedPreferences("readerForDesign", 0);
         editor = sharedPreferences.edit();
@@ -57,7 +59,7 @@ public class SharedPreferenceUtils {
     }
 
     public String getString(String key) {
-        return sharedPreferences.getString(key, null);
+        return sharedPreferences.getString(key, "");
     }
 
 }

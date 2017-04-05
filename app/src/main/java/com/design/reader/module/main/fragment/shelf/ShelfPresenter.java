@@ -1,8 +1,13 @@
 package com.design.reader.module.main.fragment.shelf;
 
+import android.Manifest;
+import android.app.Activity;
+
 import com.design.reader.api.ReaderApi;
 import com.design.reader.base.BasePresenter;
 import com.design.reader.base.MyApplication;
+import com.tbruyelle.rxpermissions.Permission;
+import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,6 +27,22 @@ import rx.schedulers.Schedulers;
 public class ShelfPresenter extends BasePresenter<ShelfView> {
 
     Subscription downloadSubscription;
+
+    public void initPermission(Activity activity) {
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(new Action1<Permission>() {
+            @Override
+            public void call(Permission permission) {
+                if (isViewAttached()) {
+                    if (permission.granted) {
+                        getView().grantedPermission();
+                    } else {
+                        getView().permissionFailed();
+                    }
+                }
+            }
+        });
+    }
 
     public void downloadBook(String url) {
 //        downloadSubscription = Observable.create(new Observable.OnSubscribe<String>() {

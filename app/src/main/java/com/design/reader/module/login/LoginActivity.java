@@ -1,5 +1,6 @@
 package com.design.reader.module.login;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import com.design.reader.R;
 import com.design.reader.base.BaseActivity;
 import com.design.reader.base.MyApplication;
+import com.design.reader.module.main.MainActivity;
+import com.design.reader.tools.SharedPreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,6 +36,11 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
     @Override
     public void initViews() {
         SMSSDK.initSDK(this, MyApplication.MOBAppKey, MyApplication.MOBAppSecrete);
+        if (SharedPreferenceUtils.getInstance().getBoolean(SharedPreferenceUtils.AUTO_LOGIN)) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -64,6 +72,13 @@ public class LoginActivity extends BaseActivity<LoginView, LoginPresenter> imple
 
     @Override
     public void loginSuccess() {
-
+        if (rememberPassword.isChecked()) {
+            SharedPreferenceUtils.getInstance().putBoolean(SharedPreferenceUtils.AUTO_LOGIN, true);
+        } else {
+            SharedPreferenceUtils.getInstance().putBoolean(SharedPreferenceUtils.AUTO_LOGIN, false);
+        }
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

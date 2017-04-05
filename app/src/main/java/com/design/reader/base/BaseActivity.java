@@ -15,6 +15,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        AppManager.getAppManager().addActivity(this);
         mPresenter = createPresenter();
         mPresenter.attacheView((V) this);
         initViews();
@@ -30,5 +31,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.dettachView();
+        AppManager.getAppManager().finishActivity(this);
     }
 }
